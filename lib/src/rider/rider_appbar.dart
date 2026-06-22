@@ -2,37 +2,23 @@
 
 part of app_theme;
 
-final loginScreenAppBar = AppBar(
-  automaticallyImplyLeading: false,
-  backgroundColor: AppColors.white000,
-  elevation: 0,
-  toolbarHeight: 32,
-);
-
-final otpVerificationAppBar = AppBar(
-  automaticallyImplyLeading: false,
-  backgroundColor: Colors.white,
-  elevation: 0,
-  toolbarHeight: 32,
-);
-
 final riderNameScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: AppColors.white000,
+  backgroundColor: RiderAppColors.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final riderEmailIdScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: AppColors.white000,
+  backgroundColor: RiderAppColors.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final riderAcceptTermsAndPolicy = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: AppColors.white000,
+  backgroundColor: RiderAppColors.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
@@ -52,7 +38,7 @@ PreferredSize accountViewAppBar({
       child: Column(
         children: [
           Container(
-            color: AppColors.white000,
+            color: RiderAppColors.white000,
             margin: const EdgeInsets.only(top: 60, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +56,7 @@ PreferredSize accountViewAppBar({
                     Container(
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                        color: rating.contains("No") ? AppColors.bgMuted : AppColors.green012,
+                        color: rating.contains("No") ? RiderAppColors.bgMuted : RiderAppColors.green012,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(
@@ -78,13 +64,13 @@ PreferredSize accountViewAppBar({
                         children: [
                           Icon(
                             Icons.star_rate_rounded,
-                            color: rating.contains("No") ? AppColors.textSecondary : AppColors.brandPrimary,
+                            color: rating.contains("No") ? RiderAppColors.textSecondary : RiderAppColors.brandPrimary,
                             size: 13,
                           ),
                           TextViewWidget(
                             text: rating,
                             fontSize: 12,
-                            textColor: rating.contains("No") ? AppColors.textSecondary : AppColors.brandPrimary,
+                            textColor: rating.contains("No") ? RiderAppColors.textSecondary : RiderAppColors.brandPrimary,
                           ),
                           const SizedBox(width: 10)
                         ],
@@ -109,16 +95,16 @@ PreferredSize backButtonAppBar(BuildContext context) {
     preferredSize: const Size.fromHeight(kToolbarHeight),
     child: AppBar(
       elevation: 0,
-      backgroundColor: AppColors.white000,
+      backgroundColor: RiderAppColors.white000,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -130,10 +116,10 @@ AppBar settingAppBar(BuildContext context, VoidCallback onTap) => AppBar(
       leading: IconButton(
         onPressed: onTap,
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -150,10 +136,10 @@ AppBar profileAppBar(BuildContext context, VoidCallback editCallback) => AppBar(
           Navigator.pop(context);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -176,10 +162,10 @@ AppBar editProfileAppBar(BuildContext context) => AppBar(
           Navigator.pop(context);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -197,10 +183,10 @@ AppBar notificationAppBar(BuildContext context) => AppBar(
           Navigator.pop(context);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -215,17 +201,17 @@ PreferredSize savedPlacesAppBar(BuildContext context, {required Function()? onCl
   return PreferredSize(
     preferredSize: const Size.fromHeight(80),
     child: AppBar(
-      backgroundColor: AppColors.white000,
+      backgroundColor: RiderAppColors.white000,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context, true);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),
@@ -233,10 +219,10 @@ PreferredSize savedPlacesAppBar(BuildContext context, {required Function()? onCl
         IconButton(
           onPressed: onClickAddPlace,
           icon: const CircleAvatar(
-            backgroundColor: AppColors.grey025,
+            backgroundColor: RiderAppColors.grey025,
             child: Icon(
               Icons.add,
-              color: AppColors.green700,
+              color: RiderAppColors.green700,
             ),
           ),
         ),
@@ -252,10 +238,10 @@ AppBar paymentMethodAppBar(BuildContext context) => AppBar(
           Navigator.pop(context);
         },
         icon: const CircleAvatar(
-          backgroundColor: AppColors.grey025,
+          backgroundColor: RiderAppColors.grey025,
           child: Icon(
             Icons.arrow_back,
-            color: AppColors.green700,
+            color: RiderAppColors.green700,
           ),
         ),
       ),

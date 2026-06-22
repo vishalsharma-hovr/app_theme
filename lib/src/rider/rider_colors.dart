@@ -2,7 +2,7 @@
 
 part of app_theme;
 
-class AppColors {
+class RiderAppColors {
   //rgba(247, 247, 250, 1)
 
   /* Black */
@@ -22,6 +22,7 @@ class AppColors {
   static const grey600 = Color.fromRGBO(79, 79, 77, 1);
   static const grey700 = Color.fromRGBO(58, 58, 57, 1);
   static const grey800 = Color.fromRGBO(37, 37, 36, 1);
+  static const grey900 = Color.fromRGBO(68, 68, 68, 1);
 
 /* Green */
   static const green012 = Color.fromRGBO(237, 244, 234, 1);
@@ -99,4 +100,32 @@ class AppColors {
 
   ///MARK: DISCOVERY X
   static const discoveryXColor = Color.fromRGBO(216, 30, 74, 1); //rgba(216,30,74,1)
+
+  /// Brand color
+  // static const brandPrimary = Color.fromRGBO(20, 128, 35, 1);
+
+  //MARK: Text Color
+  // static const textPrimary = Color.fromRGBO(23, 23, 23, 1);
+  // static const textSecondary = Color.fromRGBO(64, 64, 64, 1);
+  // static const textMuted = Color.fromRGBO(210, 210, 212, 1);
+  static const textMuted61 = Color.fromRGBO(161, 161, 163, 1);
+  static const textMuted2 = Color.fromRGBO(114, 114, 115, 1);
+
+  //MARK: Button Color
+  // static const bgMuted = Color.fromRGBO(242, 242, 245, 1);
+
+  //MARK: Icons colors
+  // static const iconMuted = Color.fromRGBO(114, 114, 115, 1);
+  static const lightBlue = Color.fromRGBO(29, 78, 216, 1);
+
+  //MARK: Text Colors
+  static const recommededNextStep = Color.fromRGBO(29, 78, 216, 1);
+  static const inProgress = Color.fromRGBO(219, 195, 15, 1);
+  static const needAttention = Color.fromRGBO(240, 136, 51, 0.661);
+
+  ///MARK Alerts background colors
+  static const warningAlertsBackgroundColor = Color.fromRGBO(255, 247, 222, 1);
+  static const criticalAlertsBackgroundColor = Color.fromRGBO(254, 236, 236, 1);
+  static const warningAlertIconColor = Color.fromRGBO(229, 175, 44, 1);
+  static const criticalAlertIconColor = Color.fromRGBO(204, 48, 61, 1);
 }

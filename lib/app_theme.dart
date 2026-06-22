@@ -1,9 +1,13 @@
 library app_theme;
 
-import 'package:custom_text_view/custom_text_view.dart';
 import 'package:flutter/material.dart';
+import 'package:custom_text_view/custom_text_view.dart';
 
-part "src/colors.dart";
+part 'src/common/common_app_colors.dart';
+part 'src/common/common_appbar.dart';
+part "src/rider/rider_colors.dart";
+part "src/rider/rider_appbar.dart";
 part "src/fonts.dart";
 part "src/size.dart";
-part "src/appbar.dart";
+part "src/driver/driver_colors.dart";
+part "src/driver/driver_appbar.dart";
