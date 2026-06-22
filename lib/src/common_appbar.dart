@@ -4,7 +4,7 @@ part of app_theme;
 
 final loginScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderAppColors.white000,
+  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 32,
 );

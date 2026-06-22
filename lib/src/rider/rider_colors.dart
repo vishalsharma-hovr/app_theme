@@ -2,7 +2,7 @@
 
 part of app_theme;
 
-class RiderAppColors {
+class RiderDriverAppColor {
   //rgba(247, 247, 250, 1)
 
   /* Black */

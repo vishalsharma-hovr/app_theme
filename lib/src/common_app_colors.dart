@@ -1,6 +1,6 @@
 part of app_theme;
 
-class CommonAppColors {
+class AppColor {
   ///MARK: Black
   static const black900 = Color.fromRGBO(13, 13, 12, 1);
 
