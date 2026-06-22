@@ -106,4 +106,32 @@ class AppColor {
 
   ///MARK: DISCOVERY X
   static const discoveryXColor = Color.fromRGBO(216, 30, 74, 1); //rgba(216,30,74,1)
+
+  ///MARK: Extra
+  static const unKnownTextColor = Color.fromRGBO(68, 68, 68, 1);
+
+  static const blueRatingColors = Color.fromRGBO(65, 116, 212, 1);
+
+  static const goOfflineButtonColors = Color.fromRGBO(101, 102, 100, 1);
+
+  ///rgba(232, 235, 231, 1)
+  static const whiteColorButton = Color.fromRGBO(232, 235, 231, 1);
+
+  ///rgba(62, 144, 30, 0.05)
+  static const manageMemberShipDividerColor = Color.fromRGBO(62, 144, 30, 0.05);
+  static const textMuted61 = Color.fromRGBO(161, 161, 163, 1);
+  static const textMuted2 = Color.fromRGBO(114, 114, 115, 1);
+
+  static const lightBlue = Color.fromRGBO(29, 78, 216, 1);
+
+  //MARK: Text Colors
+  static const recommededNextStep = Color.fromRGBO(29, 78, 216, 1);
+  static const inProgress = Color.fromRGBO(219, 195, 15, 1);
+  static const needAttention = Color.fromRGBO(240, 136, 51, 0.661);
+
+  ///MARK Alerts background colors
+  static const warningAlertsBackgroundColor = Color.fromRGBO(255, 247, 222, 1);
+  static const criticalAlertsBackgroundColor = Color.fromRGBO(254, 236, 236, 1);
+  static const warningAlertIconColor = Color.fromRGBO(229, 175, 44, 1);
+  static const criticalAlertIconColor = Color.fromRGBO(204, 48, 61, 1);
 }
