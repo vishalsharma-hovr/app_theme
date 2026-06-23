@@ -129,3 +129,4 @@ class RiderDriverAppColor {
   static const warningAlertIconColor = Color.fromRGBO(229, 175, 44, 1);
   static const criticalAlertIconColor = Color.fromRGBO(204, 48, 61, 1);
 }
+
