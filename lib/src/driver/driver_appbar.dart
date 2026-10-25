@@ -4,61 +4,63 @@ part of app_theme;
 
 final driverNameScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final driverEmailIdScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final driverAcceptTermsAndPolicy = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final uploadTask = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 80,
 );
 
+// Top-level builders have no BuildContext, so coloured parts use a Builder.
 AppBar buildEarningsAppBar(String title, {VoidCallback? onBackPressed, VoidCallback? onHelpPressed}) {
   return AppBar(
-    title: Text(
-      title,
-      style: const TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.w600,
-        fontSize: 20,
+    title: Builder(
+      builder: (context) => Text(
+        title,
+        style: TextStyle(
+          color: context.colors.black,
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+        ),
       ),
     ),
     centerTitle: true,
-    backgroundColor: Colors.white,
     elevation: 0,
-    leading: IconButton.filled(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(RiderDriverAppColor.grey025),
+    leading: Builder(
+      builder: (context) => IconButton.filled(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(context.colors.grey025),
+        ),
+        onPressed: onBackPressed,
+        color: context.brand.green700,
+        icon: const Icon(Icons.arrow_back),
       ),
-      onPressed: onBackPressed,
-      color: RiderDriverAppColor.green700,
-      icon: const Icon(Icons.arrow_back),
     ),
     actions: [
-      IconButton.filled(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(RiderDriverAppColor.grey025),
+      Builder(
+        builder: (context) => IconButton.filled(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(context.colors.grey025),
+          ),
+          onPressed: onHelpPressed,
+          color: context.brand.green700,
+          icon: const Icon(Icons.help),
         ),
-        onPressed: onHelpPressed,
-        color: RiderDriverAppColor.green700,
-        icon: const Icon(Icons.help),
       ),
       const SizedBox(width: 10)
     ],
@@ -67,20 +69,23 @@ AppBar buildEarningsAppBar(String title, {VoidCallback? onBackPressed, VoidCallb
 
 AppBar backbuttonAppBar({VoidCallback? onBackPressed, String title = "", bool centerTitle = false}) {
   return AppBar(
-    leading: IconButton(
-      style: ButtonStyle(backgroundColor: WidgetStateProperty.all(RiderDriverAppColor.bgMuted)),
-      onPressed: onBackPressed,
-      icon: const Icon(
-        Icons.arrow_back_ios,
-        size: 20,
-        color: RiderDriverAppColor.textPrimary,
+    leading: Builder(
+      builder: (context) => IconButton(
+        style: ButtonStyle(backgroundColor: WidgetStateProperty.all(context.colors.bgMuted)),
+        onPressed: onBackPressed,
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 20,
+          color: context.colors.textPrimary,
+        ),
       ),
     ),
     centerTitle: centerTitle,
-    title: Text(
-      title,
-      style: const TextStyle(color: RiderDriverAppColor.black900, fontSize: 20),
+    title: Builder(
+      builder: (context) => Text(
+        title,
+        style: TextStyle(color: context.colors.black900, fontSize: 20),
+      ),
     ),
   );
 }
-

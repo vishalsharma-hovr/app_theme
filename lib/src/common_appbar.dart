@@ -4,14 +4,12 @@ part of app_theme;
 
 final loginScreenAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: RiderDriverAppColor.white000,
   elevation: 0,
   toolbarHeight: 32,
 );
 
 final otpVerificationAppBar = AppBar(
   automaticallyImplyLeading: false,
-  backgroundColor: Colors.white,
   elevation: 0,
   toolbarHeight: 32,
 );
