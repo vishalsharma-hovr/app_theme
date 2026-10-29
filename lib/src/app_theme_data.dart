@@ -22,8 +22,18 @@ class AppTheme {
     AppPalette palette = AppPalette.light,
   }) {
     final brand = BrandColors.forSeason(season);
+    final seeded = ColorScheme.fromSeed(seedColor: brand.primaryColor);
     return _build(
-      ColorScheme.fromSeed(seedColor: brand.primaryColor),
+      // fromSeed shifts primary to a muted tone; in festive seasons Material
+      // widgets and the maps show the season's exact colour, as dark does.
+      // Out of season the seeded green stays: HOVR's green is under AA on
+      // the seeded surface.
+      season == SeasonalTheme.none
+          ? seeded
+          : seeded.copyWith(
+              primary: brand.primaryColor,
+              onPrimary: palette.white000,
+            ),
       palette,
       brand,
     );

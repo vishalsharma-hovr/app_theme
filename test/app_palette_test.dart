@@ -85,9 +85,17 @@ void main() {
           d.lightBlue,
           d.recommededNextStep,
           d.warningColorsStringColors,
+          d.grey300,
+          d.textMuted,
         ]) {
           expect(_contrast(fg, bg), greaterThanOrEqualTo(4.5), reason: '$fg on $bg');
         }
+      }
+    });
+
+    test('locked/disabled grey stays legible (3:1) on dark backgrounds', () {
+      for (final bg in [d.white000, d.bgColor, d.grey012, d.grey025]) {
+        expect(_contrast(d.grey200, bg), greaterThanOrEqualTo(3), reason: 'grey200 on $bg');
       }
     });
 
@@ -126,5 +134,23 @@ void main() {
     expect(AppPalette.light.lerp(AppPalette.dark, 0.4), AppPalette.light);
     expect(AppPalette.light.lerp(AppPalette.dark, 0.6), AppPalette.dark);
     expect(AppPalette.light.lerp(null, 0.6), AppPalette.light);
+  });
+
+  group('status colours', () {
+    test('success and warning read on the page background in light and dark', () {
+      for (final p in [AppPalette.light, AppPalette.driverLight, AppPalette.dark]) {
+        expect(_contrast(p.successColor, p.white000), greaterThanOrEqualTo(4.5));
+        expect(_contrast(p.warningColor, p.white000), greaterThanOrEqualTo(4.5));
+      }
+    });
+
+    test('keep their meaning: success is green and warning amber in every palette', () {
+      for (final p in [AppPalette.light, AppPalette.dark]) {
+        final success = HSVColor.fromColor(p.successColor).hue;
+        final warning = HSVColor.fromColor(p.warningColor).hue;
+        expect(success, inInclusiveRange(90, 160));
+        expect(warning, inInclusiveRange(25, 50));
+      }
+    });
   });
 }

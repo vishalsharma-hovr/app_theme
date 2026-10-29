@@ -59,6 +59,8 @@ class AppPalette extends ThemeExtension<AppPalette> {
     this.warningAlertsBackgroundColor = AppColors.warningAlertsBackgroundColor,
     this.criticalAlertsBackgroundColor = AppColors.criticalAlertsBackgroundColor,
     this.criticalAlertIconColor = AppColors.criticalAlertIconColor,
+    this.successColor = AppColors.successColor,
+    this.warningColor = AppColors.warningColor,
   });
 
   final Color white000;
@@ -109,6 +111,12 @@ class AppPalette extends ThemeExtension<AppPalette> {
   final Color criticalAlertsBackgroundColor;
   final Color criticalAlertIconColor;
 
+  /// Success state; green in every season, readable on [white000].
+  final Color successColor;
+
+  /// Warning state; amber in every season, readable on [white000].
+  final Color warningColor;
+
   /// Rider app light mode: exactly `AppColors`.
   static const light = AppPalette();
 
@@ -131,8 +139,8 @@ class AppPalette extends ThemeExtension<AppPalette> {
     grey025: Color(0xFF262625),
     grey050: Color(0xFF353533),
     grey100: Color(0xFF474745),
-    grey200: Color(0xFF5F605E),
-    grey300: Color(0xFF5F605E),
+    grey200: Color(0xFF7A7B79),
+    grey300: Color(0xFF8C8D8B),
     grey400: Color(0xFF8C8D8B),
     grey500: Color(0xFFA0A19F),
     grey600: Color(0xFFB9BAB7),
@@ -155,7 +163,7 @@ class AppPalette extends ThemeExtension<AppPalette> {
     complaintSelectedColor: Color(0xFFECECEC),
     textPrimary: Color(0xFFECECEC),
     textSecondary: Color(0xFFBEBEC0),
-    textMuted: Color(0xFF5A5A5C),
+    textMuted: Color(0xFF8E8E90),
     textMuted61: Color(0xFFA1A1A3),
     textMuted2: Color(0xFF969698),
     bgMuted: Color(0xFF2D2D2E),
@@ -169,6 +177,8 @@ class AppPalette extends ThemeExtension<AppPalette> {
     warningAlertsBackgroundColor: Color(0xFF3A3014),
     criticalAlertsBackgroundColor: Color(0xFF3C181A),
     criticalAlertIconColor: Color(0xFFF87171),
+    successColor: Color(0xFF4ADE80),
+    warningColor: Color(0xFFFBBF24),
   );
 
   /// The palette in [context]'s theme, or [light] when none is attached.

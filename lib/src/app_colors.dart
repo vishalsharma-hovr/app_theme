@@ -134,4 +134,10 @@ class AppColors {
   static const criticalAlertsBackgroundColor = Color.fromRGBO(254, 236, 236, 1);
   static const warningAlertIconColor = Color.fromRGBO(229, 175, 44, 1);
   static const criticalAlertIconColor = Color.fromRGBO(204, 48, 61, 1);
+
+  /// Success state (verified, enabled); stays green in every season.
+  static const successColor = Color.fromRGBO(46, 125, 50, 1);
+
+  /// Warning state (pending, needs attention); stays amber in every season.
+  static const warningColor = Color.fromRGBO(180, 83, 9, 1);
 }

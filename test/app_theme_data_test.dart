@@ -21,7 +21,7 @@ void main() {
 
   test('light theme keeps the apps\' current look out of season', () {
     final t = AppTheme.light();
-    expect(t.colorScheme, ColorScheme.fromSeed(seedColor: AppColors.primaryColor));
+    expect(t.colorScheme, ColorScheme.fromSeed(seedColor: BrandColors.standard.primaryColor));
     expect(t.scaffoldBackgroundColor, AppColors.white000);
     expect(t.appBarTheme.backgroundColor, AppColors.white000);
     expect(t.appBarTheme.scrolledUnderElevation, 0);
@@ -40,6 +40,18 @@ void main() {
       AppTheme.dark(season: SeasonalTheme.christmas).extension<BrandColors>(),
       BrandColors.christmas.dark,
     );
+  });
+
+  test('festive Material primary is exactly the season\'s brand colour, light and dark', () {
+    for (final season in SeasonalTheme.values.where((s) => s != SeasonalTheme.none)) {
+      final light = AppTheme.light(season: season).colorScheme;
+      final dark = AppTheme.dark(season: season).colorScheme;
+      expect(light.primary, BrandColors.forSeason(season).primaryColor, reason: '${season.name} light');
+      expect(dark.primary, BrandColors.forSeason(season).dark.primaryColor, reason: '${season.name} dark');
+      // Button text and icons on primary stay readable (WCAG AA).
+      expect(_contrast(light.onPrimary, light.primary), greaterThanOrEqualTo(4.5), reason: '${season.name} light');
+      expect(_contrast(dark.onPrimary, dark.primary), greaterThanOrEqualTo(4.5), reason: '${season.name} dark');
+    }
   });
 
   test('festive seasons tint the Material colour scheme', () {

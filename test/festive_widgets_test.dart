@@ -50,7 +50,7 @@ void main() {
       ]) {
         testWidgets('${season.name} $mode: greeting meets WCAG AA on the banner', (tester) async {
           await tester.pumpWidget(host(FestiveBanner(season: season, message: 'Hi'), theme: theme));
-          final text = tester.widget<TextViewWidget>(find.byType(TextViewWidget)).textColor!;
+          final text = tester.widget<TextViewWidget>(find.byType(TextViewWidget)).textColor;
           final box = tester.widget<Container>(find.byKey(FestiveBanner.surfaceKey));
           final bg = (box.decoration! as BoxDecoration).color!;
           expect(_contrast(text, bg), greaterThanOrEqualTo(4.5));

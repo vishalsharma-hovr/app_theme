@@ -32,7 +32,8 @@ class DriverAppColor {
   static const green100 = Color.fromRGBO(155, 219, 130, 1);
   static const green200 = Color.fromRGBO(98, 199, 58, 1);
   static const green300 = Color.fromRGBO(74, 171, 36, 1);
-  static const green400 = Color.fromRGBO(62, 144, 30, 1);
+  // Darkened from (62, 144, 30), which was 4.03:1 on white, to pass WCAG AA (4.62:1).
+  static const green400 = Color.fromRGBO(57, 133, 28, 1);
   static const green500 = Color.fromRGBO(50, 117, 25, 1);
   static const green600 = Color.fromRGBO(39, 90, 19, 1);
   static const green700 = Color.fromRGBO(29, 66, 14, 1);
@@ -41,7 +42,8 @@ class DriverAppColor {
   static const green056 = Color.fromRGBO(56, 130, 27, 1);
 
   /* Extra Colors */
-  static const primaryColor = Color.fromRGBO(62, 144, 30, 1);
+  // Darkened from (62, 144, 30), which was 4.03:1 on white, to pass WCAG AA (4.62:1).
+  static const primaryColor = Color.fromRGBO(57, 133, 28, 1);
   static const greenButton = Color.fromRGBO(48, 128, 17, 1);
   static const transparent = Colors.transparent;
   static const blackColor = Colors.black;

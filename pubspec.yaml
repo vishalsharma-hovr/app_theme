@@ -1,6 +1,6 @@
 name: app_theme
 description: "A new Flutter package project."
-version: 0.0.1
+version: 0.1.0
 publish_to: none
 
 environment:
@@ -32,6 +32,8 @@ flutter:
     - assets/lottie/christmas_tree.json
     - assets/lottie/fireworks.json
     - assets/lottie/party_popper.json
+    - assets/map_styles/
+    - assets/vehicle_icons/
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

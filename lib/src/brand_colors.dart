@@ -85,15 +85,16 @@ class BrandColors extends ThemeExtension<BrandColors> {
     brandPrimary: Color(0xFFC2410C),
   );
 
-  /// Deep pine with gold tints (no red, which stays the error colour).
+  /// Deep pine with pine-green tints: no gold (New Year's) or orange
+  /// (Halloween's), and no red, which stays the error colour.
   static const christmas = BrandColors(
-    green012: Color(0xFFFFFBEB),
-    green025: Color(0xFFFEF3C7),
-    green050: Color(0xFFFDE68A),
+    green012: Color(0xFFF0FDF4),
+    green025: Color(0xFFDCFCE7),
+    green050: Color(0xFFBBF7D0),
     green056: Color(0xFF15803D),
-    green100: Color(0xFFFCD34D),
-    green200: Color(0xFFF59E0B),
-    green300: Color(0xFFD97706),
+    green100: Color(0xFF86EFAC),
+    green200: Color(0xFF4ADE80),
+    green300: Color(0xFF22C55E),
     green400: Color(0xFF15803D),
     green500: Color(0xFF166534),
     green600: Color(0xFF14532D),
@@ -133,8 +134,8 @@ class BrandColors extends ThemeExtension<BrandColors> {
     green050: Color(0xFFFDE68A),
     green056: Color(0xFF4338CA),
     green100: Color(0xFFFCD34D),
-    green200: Color(0xFFF59E0B),
-    green300: Color(0xFFD97706),
+    green200: Color(0xFFEAB308),
+    green300: Color(0xFFCA8A04),
     green400: Color(0xFF4338CA),
     green500: Color(0xFF3730A3),
     green600: Color(0xFF312E81),

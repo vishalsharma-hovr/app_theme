@@ -24,6 +24,39 @@ List<Color> _strongTokens(BrandColors c) => [
   c.brandPrimary,
 ];
 
+
+/// Every token of [c].
+List<Color> _allTokens(BrandColors c) => [
+  c.green012,
+  c.green025,
+  c.green050,
+  c.green056,
+  c.green100,
+  c.green200,
+  c.green300,
+  c.green400,
+  c.green500,
+  c.green600,
+  c.green700,
+  c.green800,
+  c.green900,
+  c.greenButton,
+  c.primaryColor,
+  c.brandPrimary,
+];
+
+/// Clearly coloured tokens (not near-white or near-black) whose hue lies in
+/// [from, to] degrees: e.g. Halloween orange 15–35, New Year gold 40–60.
+List<Color> _inHue(BrandColors c, double from, double to) => [
+  for (final colour in _allTokens(c))
+    if (HSVColor.fromColor(colour) case final hsv
+        when hsv.saturation > 0.4 &&
+            hsv.value > 0.3 &&
+            hsv.hue >= from &&
+            hsv.hue <= to)
+      colour,
+];
+
 void main() {
   group('BrandColors.standard', () {
     test(
@@ -77,9 +110,7 @@ void main() {
       expect(BrandColors.newYear.greenButton, isNot(BrandColors.christmas.greenButton));
     });
 
-    // Standard must equal today's greens, and app_theme's green400 is already
-    // below AA (4.03:1), so only the seasonal palettes are held to AA.
-    for (final season in [SeasonalTheme.halloween, SeasonalTheme.christmas, SeasonalTheme.newYear]) {
+    for (final season in SeasonalTheme.values) {
       test('${season.name}: strong tokens meet WCAG AA (4.5:1) on white', () {
         for (final color in _strongTokens(BrandColors.forSeason(season))) {
           expect(
@@ -167,4 +198,35 @@ void main() {
       });
     }
   });
+
+  group('festive palettes keep to their own colours', () {
+    const seasons = {
+      'halloween': BrandColors.halloween,
+      'christmas': BrandColors.christmas,
+      'newYear': BrandColors.newYear,
+    };
+
+    test('no two festive seasons share a colour', () {
+      for (final MapEntry(key: a, value: ca) in seasons.entries) {
+        for (final MapEntry(key: b, value: cb) in seasons.entries) {
+          if (a.compareTo(b) >= 0) continue;
+          final shared = _allTokens(ca).toSet().intersection(_allTokens(cb).toSet());
+          expect(shared, isEmpty, reason: '$a and $b share $shared');
+        }
+      }
+    });
+
+    test('Christmas has no Halloween orange or New Year gold', () {
+      expect(_inHue(BrandColors.christmas, 15, 60), isEmpty);
+    });
+
+    test('New Year has no Halloween orange', () {
+      expect(_inHue(BrandColors.newYear, 15, 35), isEmpty);
+    });
+
+    test('Halloween has no New Year gold', () {
+      expect(_inHue(BrandColors.halloween, 40, 60), isEmpty);
+    });
+  });
 }
+
