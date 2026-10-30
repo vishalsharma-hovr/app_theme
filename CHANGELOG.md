@@ -1,3 +1,12 @@
+## 0.1.3
+
+* Out of season, HOVR's button greens are the same in dark mode as in light:
+  `brandPrimary` `#148023` and `greenButton` `#308011` no longer turn light
+  green (`#62C73A`) in dark mode, matching `primaryColor` `#39851C`. Put white
+  labels on them (`colorScheme.onPrimary`; at least 4.5:1). Used as text or
+  icons on the dark page they are 3.5–3.9:1 (about 3:1 on the dark chip tint):
+  fine for icons and bold text, below AA for small text (accepted).
+
 ## 0.1.2
 
 * Screen backgrounds follow the festive season: `AppPalette.forSeason(season,

@@ -96,10 +96,18 @@ void main() {
       }
     });
 
-    test('out of season the HOVR primary is the same in light and dark', () {
+    test('out of season the HOVR button and primary greens are the same in light and dark', () {
+      const s = BrandColors.standard;
       final d = BrandColors.forSeason(SeasonalTheme.none, dark: true);
-      expect(d.primaryColor, BrandColors.standard.primaryColor);
-      expect(d.copyWith(primaryColor: BrandColors.standard.dark.primaryColor), BrandColors.standard.dark);
+      expect((d.primaryColor, d.brandPrimary, d.greenButton), (s.primaryColor, s.brandPrimary, s.greenButton));
+      // Everything else still mirrors for dark mode.
+      expect(
+        d.copyWith(primaryColor: s.dark.primaryColor, brandPrimary: s.dark.brandPrimary, greenButton: s.dark.greenButton),
+        s.dark,
+      );
+      for (final fill in [d.primaryColor, d.brandPrimary, d.greenButton]) {
+        expect(_contrast(Colors.white, fill), greaterThanOrEqualTo(4.5), reason: 'white label on $fill');
+      }
     });
 
     test('seasonal palettes actually differ from the standard one', () {
@@ -116,8 +124,10 @@ void main() {
         ('light', BrandColors.forSeason(season), AppPalette.light),
         ('dark', BrandColors.forSeason(season, dark: true), AppPalette.dark),
       ]) {
-        // The fixed HOVR primary is 3.92:1 on dark (accepted; AA for buttons and icons).
+        // The fixed HOVR fills (primary, brandPrimary, greenButton) are 3.5–3.9:1 on
+        // dark (accepted: AA for buttons and icons, not small text).
         final hovrDarkPrimary = mode == 'dark' && season == SeasonalTheme.none;
+        const hovrFills = {'primaryColor', 'brandPrimary', 'greenButton'};
 
         test('$mode ${season.name}: text and icon tokens read on the page', () {
           // shortcut: light checks the white page only; several HOVR greens are just
@@ -125,7 +135,7 @@ void main() {
           final pages = mode == 'dark' ? [palette.white000, palette.bgColor] : [palette.white000];
           for (final bg in pages) {
             for (final MapEntry(key: name, value: fg) in _textTokens(brand).entries) {
-              final min = hovrDarkPrimary && name == 'primaryColor' ? 3.0 : 4.5;
+              final min = hovrDarkPrimary && hovrFills.contains(name) ? 3.0 : 4.5;
               expect(_contrast(fg, bg), greaterThanOrEqualTo(min), reason: '$name on $bg');
             }
           }
@@ -138,7 +148,9 @@ void main() {
             (brand.brandPrimary, brand.green012),
             (brand.green700, palette.grey025),
           ]) {
-            expect(_contrast(fg, bg), greaterThanOrEqualTo(4.5), reason: '$fg on $bg');
+            // Accepted: out of season the fixed HOVR brandPrimary on the dark chip tint is ~3:1.
+            final min = hovrDarkPrimary && fg == brand.brandPrimary ? 3.0 : 4.5;
+            expect(_contrast(fg, bg), greaterThanOrEqualTo(min), reason: '$fg on $bg');
           }
         });
       }

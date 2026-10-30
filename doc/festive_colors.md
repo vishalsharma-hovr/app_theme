@@ -25,7 +25,10 @@ MaterialApp(
 - **Status colours never change:** error `#E80101`, success `#2E7D32`, warning
   `#B45309` (light; dark versions in `AppPalette.dark`). Christmas has no red so
   red always means "error".
-- **Out of season, the HOVR primary `#39851C` is the same in light and dark.**
+- **Out of season, the HOVR fills are the same in light and dark:** primary
+  `#39851C`, `brandPrimary` `#148023` (button fill) and `greenButton` `#308011`,
+  with white labels (at least 4.5:1). On the dark page they are 3.5–3.9:1, fine
+  for buttons and icons; as small text (e.g. the rating chip) about 3:1, accepted.
   Festive primaries use a lighter tone in dark mode: New Year's indigo is only
   2.29:1 on the dark page, below the 3:1 minimum for buttons.
 - **Readable in every season:** text and icon tokens are at least 4.5:1 (WCAG AA)
@@ -84,9 +87,9 @@ are for text, icons and buttons. Dark mode mirrors the scale.
 | `green700` | `#1D420E` / `#E4F4DE` | `#7C2D12` / `#FFEDD5` | `#0F3D22` / `#DCFCE7` | `#1E1B4B` / `#FEF3C7` |
 | `green800` | `#122A09` / `#EDF4EA` | `#431407` / `#FFF7ED` | `#052E16` / `#F0FDF4` | `#13112F` / `#FFFBEB` |
 | `green900` | `#081404` / `#EDF4EA` | `#2A0C03` / `#FFF7ED` | `#021A0C` / `#F0FDF4` | `#0A091A` / `#FFFBEB` |
-| `greenButton` | `#308011` / `#62C73A` | `#C2410C` / `#FB923C` | `#166534` / `#4ADE80` | `#3730A3` / `#EAB308` |
+| `greenButton` | `#308011` / `#308011` | `#C2410C` / `#FB923C` | `#166534` / `#4ADE80` | `#3730A3` / `#EAB308` |
 | `primaryColor` | `#39851C` / `#39851C` | `#C2410C` / `#FB923C` | `#15803D` / `#4ADE80` | `#4338CA` / `#EAB308` |
-| `brandPrimary` | `#148023` / `#62C73A` | `#C2410C` / `#FB923C` | `#166534` / `#4ADE80` | `#3730A3` / `#EAB308` |
+| `brandPrimary` | `#148023` / `#148023` | `#C2410C` / `#FB923C` | `#166534` / `#4ADE80` | `#3730A3` / `#EAB308` |
 
 ## Decoration colours
 

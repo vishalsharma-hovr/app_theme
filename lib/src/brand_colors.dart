@@ -154,7 +154,9 @@ class BrandColors extends ThemeExtension<BrandColors> {
   );
 
   /// The palette for [season]; [dark] gives its dark-mode version. Out of
-  /// season the HOVR primary stays `#39851C` in dark too; festive primaries
+  /// season the HOVR fills stay as in light mode (primary `#39851C`,
+  /// [brandPrimary] `#148023`, [greenButton] `#308011`; white labels on them,
+  /// 3.5–3.9:1 on the dark page, so use them for fills and icons); festive primaries
   /// use their lighter tone in dark (New Year's indigo is under 3:1 on dark).
   static BrandColors forSeason(SeasonalTheme season, {bool dark = false}) {
     final light = switch (season) {
@@ -165,7 +167,12 @@ class BrandColors extends ThemeExtension<BrandColors> {
     };
     if (!dark) return light;
     if (season == SeasonalTheme.none) {
-      return standard.dark.copyWith(primaryColor: standard.primaryColor);
+      // HOVR's button and primary greens are the brand: the same in both modes.
+      return standard.dark.copyWith(
+        primaryColor: standard.primaryColor,
+        brandPrimary: standard.brandPrimary,
+        greenButton: standard.greenButton,
+      );
     }
     return light.dark;
   }
