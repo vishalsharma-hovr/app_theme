@@ -24,11 +24,29 @@
     ]
   },
   {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#13243a"
+      }
+    ]
+  },
+  {
     "featureType": "administrative.locality",
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e8c66a"
+        "color": "#fff4d6"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "elementType": "all",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -46,7 +64,16 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#16283b"
+        "color": "#0f3a3d"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#5eead4"
       }
     ]
   },
@@ -55,7 +82,25 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#1f3048"
+        "color": "#2b2610"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f9dc8c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#fff4d6"
       }
     ]
   },
@@ -69,20 +114,56 @@
     ]
   },
   {
-    "featureType": "road.highway",
-    "elementType": "geometry",
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#d4af37"
+        "color": "#3d2a05"
       }
     ]
   },
   {
-    "featureType": "transit",
+    "featureType": "road.arterial",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f9dc8c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d2a05"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#fff4d6"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#1f3048"
+        "color": "#e0b84a"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#fff4d6"
       }
     ]
   },
@@ -100,25 +181,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#e8c66a"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.business",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#2a3f5c"
+        "color": "#7fa6c9"
       }
     ]
   }

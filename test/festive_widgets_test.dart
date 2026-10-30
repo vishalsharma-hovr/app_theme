@@ -44,15 +44,17 @@ void main() {
     });
 
     for (final season in [SeasonalTheme.halloween, SeasonalTheme.christmas, SeasonalTheme.newYear]) {
-      for (final (mode, theme) in [
-        ('light', AppTheme.light(season: season)),
-        ('dark', AppTheme.dark(season: season)),
+      for (final (mode, theme, brand) in [
+        ('light', AppTheme.light(season: season), BrandColors.forSeason(season)),
+        ('dark', AppTheme.dark(season: season), BrandColors.forSeason(season, dark: true)),
       ]) {
-        testWidgets('${season.name} $mode: greeting meets WCAG AA on the banner', (tester) async {
+        testWidgets('${season.name} $mode: festive card, greeting meets WCAG AA', (tester) async {
           await tester.pumpWidget(host(FestiveBanner(season: season, message: 'Hi'), theme: theme));
-          final text = tester.widget<TextViewWidget>(find.byType(TextViewWidget)).textColor;
+          final text = tester.widget<TextViewWidget>(find.byType(TextViewWidget)).textColor!;
           final box = tester.widget<Container>(find.byKey(FestiveBanner.surfaceKey));
           final bg = (box.decoration! as BoxDecoration).color!;
+          expect(bg, brand.green012);
+          expect(text, brand.green700);
           expect(_contrast(text, bg), greaterThanOrEqualTo(4.5));
         });
       }

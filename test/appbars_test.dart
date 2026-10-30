@@ -34,9 +34,11 @@ void main() {
     });
   }
 
-  testWidgets('festive season recolours the brand accents', (tester) async {
-    await pump(tester, AppTheme.light(season: SeasonalTheme.halloween), buildEarningsAppBar('E'));
-    final back = tester.widget<IconButton>(find.widgetWithIcon(IconButton, Icons.arrow_back));
-    expect(back.color, BrandColors.halloween.green700);
-  });
+  for (final season in SeasonalTheme.values) {
+    testWidgets('${season.name}: brand accents follow the season', (tester) async {
+      await pump(tester, AppTheme.light(season: season), buildEarningsAppBar('E'));
+      final back = tester.widget<IconButton>(find.widgetWithIcon(IconButton, Icons.arrow_back));
+      expect(back.color, BrandColors.forSeason(season).green700);
+    });
+  }
 }

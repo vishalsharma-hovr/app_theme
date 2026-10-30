@@ -3,10 +3,12 @@
 part of app_theme;
 
 /// The brand accent (the `AppColors` / `DriverAppColor` greens), swapped per
-/// season and mirrored for dark mode ([dark]). Shared by the rider and driver apps.
+/// season ([forSeason]) and mirrored for dark mode ([dark]). Shared by the
+/// rider and driver apps. Every colour code is listed in `doc/festive_colors.md`.
 ///
 /// Read with `context.brand.green700` instead of `AppColors.green700` so the
-/// accent follows [SeasonalTheme] and light/dark. Neutrals live in [AppPalette].
+/// accent follows [SeasonalTheme] and light/dark. HOVR icons use
+/// `context.hovrBrand`, which never follows the season. Neutrals live in [AppPalette].
 @immutable
 class BrandColors extends ThemeExtension<BrandColors> {
   const BrandColors({
@@ -45,7 +47,8 @@ class BrandColors extends ThemeExtension<BrandColors> {
   final Color primaryColor;
   final Color brandPrimary;
 
-  /// The year-round palette: exactly the existing `DriverAppColor` greens.
+  /// The year-round HOVR palette: exactly the existing `DriverAppColor` greens.
+  /// Primary `#39851C`, the same in light and dark (see [forSeason]).
   static const standard = BrandColors(
     green012: DriverAppColor.green012,
     green025: DriverAppColor.green025,
@@ -65,7 +68,8 @@ class BrandColors extends ThemeExtension<BrandColors> {
     brandPrimary: DriverAppColor.brandPrimary,
   );
 
-  /// Pumpkin orange. Strong tokens stay at least WCAG AA on white.
+  /// Halloween: pumpkin orange. Primary `#C2410C` (dark `#FB923C`); tints
+  /// `#FFF7ED`–`#FED7AA`. Strong tokens stay at least WCAG AA on white.
   static const halloween = BrandColors(
     green012: Color(0xFFFFF7ED),
     green025: Color(0xFFFFEDD5),
@@ -85,8 +89,9 @@ class BrandColors extends ThemeExtension<BrandColors> {
     brandPrimary: Color(0xFFC2410C),
   );
 
-  /// Deep pine with pine-green tints: no gold (New Year's) or orange
-  /// (Halloween's), and no red, which stays the error colour.
+  /// Christmas: deep pine. Primary `#15803D` (dark `#4ADE80`); tints
+  /// `#F0FDF4`–`#BBF7D0`. No gold (New Year's) or orange (Halloween's), and no
+  /// red, which stays the error colour.
   static const christmas = BrandColors(
     green012: Color(0xFFF0FDF4),
     green025: Color(0xFFDCFCE7),
@@ -104,6 +109,27 @@ class BrandColors extends ThemeExtension<BrandColors> {
     greenButton: Color(0xFF166534),
     primaryColor: Color(0xFF15803D),
     brandPrimary: Color(0xFF166534),
+  );
+
+  /// New Year: midnight indigo with gold tints. Primary `#4338CA` (dark gold
+  /// `#EAB308`); tints `#FFFBEB`–`#FDE68A`. Strong tokens stay at least WCAG AA on white.
+  static const newYear = BrandColors(
+    green012: Color(0xFFFFFBEB),
+    green025: Color(0xFFFEF3C7),
+    green050: Color(0xFFFDE68A),
+    green056: Color(0xFF4338CA),
+    green100: Color(0xFFFCD34D),
+    green200: Color(0xFFEAB308),
+    green300: Color(0xFFCA8A04),
+    green400: Color(0xFF4338CA),
+    green500: Color(0xFF3730A3),
+    green600: Color(0xFF312E81),
+    green700: Color(0xFF1E1B4B),
+    green800: Color(0xFF13112F),
+    green900: Color(0xFF0A091A),
+    greenButton: Color(0xFF3730A3),
+    primaryColor: Color(0xFF4338CA),
+    brandPrimary: Color(0xFF3730A3),
   );
 
   /// Dark-mode version: the scale is mirrored, so light tints (chip and card
@@ -127,32 +153,22 @@ class BrandColors extends ThemeExtension<BrandColors> {
     brandPrimary: green200,
   );
 
-  /// Midnight indigo with gold tints. Strong tokens stay at least WCAG AA on white.
-  static const newYear = BrandColors(
-    green012: Color(0xFFFFFBEB),
-    green025: Color(0xFFFEF3C7),
-    green050: Color(0xFFFDE68A),
-    green056: Color(0xFF4338CA),
-    green100: Color(0xFFFCD34D),
-    green200: Color(0xFFEAB308),
-    green300: Color(0xFFCA8A04),
-    green400: Color(0xFF4338CA),
-    green500: Color(0xFF3730A3),
-    green600: Color(0xFF312E81),
-    green700: Color(0xFF1E1B4B),
-    green800: Color(0xFF13112F),
-    green900: Color(0xFF0A091A),
-    greenButton: Color(0xFF3730A3),
-    primaryColor: Color(0xFF4338CA),
-    brandPrimary: Color(0xFF3730A3),
-  );
-
-  static BrandColors forSeason(SeasonalTheme season) => switch (season) {
-    SeasonalTheme.none => standard,
-    SeasonalTheme.halloween => halloween,
-    SeasonalTheme.christmas => christmas,
-    SeasonalTheme.newYear => newYear,
-  };
+  /// The palette for [season]; [dark] gives its dark-mode version. Out of
+  /// season the HOVR primary stays `#39851C` in dark too; festive primaries
+  /// use their lighter tone in dark (New Year's indigo is under 3:1 on dark).
+  static BrandColors forSeason(SeasonalTheme season, {bool dark = false}) {
+    final light = switch (season) {
+      SeasonalTheme.none => standard,
+      SeasonalTheme.halloween => halloween,
+      SeasonalTheme.christmas => christmas,
+      SeasonalTheme.newYear => newYear,
+    };
+    if (!dark) return light;
+    if (season == SeasonalTheme.none) {
+      return standard.dark.copyWith(primaryColor: standard.primaryColor);
+    }
+    return light.dark;
+  }
 
   /// The palette in [context]'s theme, or [standard] when none is attached.
   static BrandColors of(BuildContext context) =>
@@ -265,4 +281,12 @@ class BrandColors extends ThemeExtension<BrandColors> {
 extension BrandColorsContext on BuildContext {
   /// Seasonal brand accent; see [BrandColors].
   BrandColors get brand => BrandColors.of(this);
+
+  /// Year-round HOVR palette for light/dark that never follows the season.
+  /// Use it for HOVR icons ([HovrIcon]) so they keep their colour while the
+  /// rest of the screen is festive.
+  BrandColors get hovrBrand => BrandColors.forSeason(
+        SeasonalTheme.none,
+        dark: Theme.of(this).brightness == Brightness.dark,
+      );
 }

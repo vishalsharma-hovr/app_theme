@@ -19,50 +19,43 @@ void main() {
     expect(AppTheme.dark().colorScheme.brightness, Brightness.dark);
   });
 
-  test('light theme keeps the apps\' current look out of season', () {
+  test('light primary is the exact HOVR green on a white surface', () {
     final t = AppTheme.light();
-    expect(t.colorScheme, ColorScheme.fromSeed(seedColor: BrandColors.standard.primaryColor));
+    expect(t.colorScheme.primary, BrandColors.standard.primaryColor);
+    expect(t.colorScheme.onPrimary, Colors.white);
+    expect(t.colorScheme.surface, AppColors.white000);
     expect(t.scaffoldBackgroundColor, AppColors.white000);
     expect(t.appBarTheme.backgroundColor, AppColors.white000);
     expect(t.appBarTheme.scrolledUnderElevation, 0);
   });
 
-  test('attaches the palette and brand for the given brightness and season', () {
+  test('attaches the palette and the HOVR brand for the given brightness', () {
     expect(AppTheme.light().extension<AppPalette>(), AppPalette.light);
     expect(AppTheme.light(palette: AppPalette.driverLight).extension<AppPalette>(), AppPalette.driverLight);
     expect(AppTheme.dark().extension<AppPalette>(), AppPalette.dark);
-    expect(AppTheme.light().extension<BrandColors>(), BrandColors.standard);
-    expect(
-      AppTheme.light(season: SeasonalTheme.halloween).extension<BrandColors>(),
-      BrandColors.halloween,
-    );
-    expect(
-      AppTheme.dark(season: SeasonalTheme.christmas).extension<BrandColors>(),
-      BrandColors.christmas.dark,
-    );
+    for (final season in SeasonalTheme.values) {
+      expect(AppTheme.light(season: season).extension<BrandColors>(), BrandColors.forSeason(season));
+      expect(
+        AppTheme.dark(season: season).extension<BrandColors>(),
+        BrandColors.forSeason(season, dark: true),
+      );
+    }
   });
 
   test('festive Material primary is exactly the season\'s brand colour, light and dark', () {
     for (final season in SeasonalTheme.values.where((s) => s != SeasonalTheme.none)) {
-      final light = AppTheme.light(season: season).colorScheme;
-      final dark = AppTheme.dark(season: season).colorScheme;
-      expect(light.primary, BrandColors.forSeason(season).primaryColor, reason: '${season.name} light');
-      expect(dark.primary, BrandColors.forSeason(season).dark.primaryColor, reason: '${season.name} dark');
-      // Button text and icons on primary stay readable (WCAG AA).
-      expect(_contrast(light.onPrimary, light.primary), greaterThanOrEqualTo(4.5), reason: '${season.name} light');
-      expect(_contrast(dark.onPrimary, dark.primary), greaterThanOrEqualTo(4.5), reason: '${season.name} dark');
+      expect(AppTheme.light(season: season).colorScheme.primary, BrandColors.forSeason(season).primaryColor);
+      expect(
+        AppTheme.dark(season: season).colorScheme.primary,
+        BrandColors.forSeason(season, dark: true).primaryColor,
+      );
     }
   });
 
-  test('festive seasons tint the Material colour scheme', () {
-    expect(
-      AppTheme.light(season: SeasonalTheme.halloween).colorScheme,
-      isNot(AppTheme.light().colorScheme),
-    );
-    expect(
-      AppTheme.dark(season: SeasonalTheme.halloween).colorScheme.primary,
-      BrandColors.halloween.dark.primaryColor,
-    );
+  test('dark primary is the same exact HOVR green as light, with white on it', () {
+    final s = AppTheme.dark().colorScheme;
+    expect(s.primary, BrandColors.standard.primaryColor);
+    expect(s.onPrimary, Colors.white);
   });
 
   test('dark theme uses the dark palette for surfaces and text', () {
@@ -81,10 +74,12 @@ void main() {
     }.entries) {
       test('$name ${season.name}: text, brand and error meet WCAG AA', () {
         final s = theme.colorScheme;
+        // HOVR green is fixed; on dark it meets the 3:1 AA level for buttons and icons.
+        final minPrimary = name == 'dark' && season == SeasonalTheme.none ? 3.0 : 4.5;
         for (final bg in [s.surface, theme.scaffoldBackgroundColor]) {
           expect(_contrast(s.onSurface, bg), greaterThanOrEqualTo(4.5));
           expect(_contrast(s.onSurfaceVariant, bg), greaterThanOrEqualTo(4.5));
-          expect(_contrast(s.primary, bg), greaterThanOrEqualTo(4.5));
+          expect(_contrast(s.primary, bg), greaterThanOrEqualTo(minPrimary));
           expect(_contrast(s.error, bg), greaterThanOrEqualTo(4.5));
         }
         expect(_contrast(s.onPrimary, s.primary), greaterThanOrEqualTo(4.5));

@@ -24,5 +24,7 @@ part "src/seasonal/seasonal_overlay.dart";
 part "src/seasonal/festive_widgets.dart";
 part "src/seasonal/festive_loader.dart";
 part "src/seasonal/map_seasonal_layer.dart";
+part "src/seasonal/map_halloween_cast.dart";
 part "src/map_style.dart";
 part "src/festive_car.dart";
+part "src/hovr_icons.dart";

@@ -15,7 +15,9 @@ bool _isRed(Color c) {
 }
 
 void main() {
-  test('Christmas map has no red: the palette keeps red for errors', () {
-    expect(_styleColors('christmas.json').where(_isRed), isEmpty);
+  test('Christmas maps have no red: the palette keeps red for errors', () {
+    for (final file in ['christmas.json', 'christmas_dark.json']) {
+      expect(_styleColors(file).where(_isRed), isEmpty, reason: file);
+    }
   });
 }

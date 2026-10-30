@@ -14,33 +14,32 @@ part of app_theme;
 ///
 /// Screens follow dark mode and the season when they read colours from the
 /// theme: `context.colors` ([AppPalette]) and `context.brand` ([BrandColors]).
+/// Colour codes per season: `doc/festive_colors.md`.
 class AppTheme {
-  /// Out of season this is the look both apps had before dark mode.
+  /// Light theme: primary is exactly [season]'s brand primary (HOVR green
+  /// `#39851C` out of season) with white on it, on the palette's white surface.
   /// The driver app passes [AppPalette.driverLight].
   static ThemeData light({
     SeasonalTheme season = SeasonalTheme.none,
     AppPalette palette = AppPalette.light,
   }) {
     final brand = BrandColors.forSeason(season);
-    final seeded = ColorScheme.fromSeed(seedColor: brand.primaryColor);
     return _build(
-      // fromSeed shifts primary to a muted tone; in festive seasons Material
-      // widgets and the maps show the season's exact colour, as dark does.
-      // Out of season the seeded green stays: HOVR's green is under AA on
-      // the seeded surface.
-      season == SeasonalTheme.none
-          ? seeded
-          : seeded.copyWith(
-              primary: brand.primaryColor,
-              onPrimary: palette.white000,
-            ),
+      // The seeded surface is tinted, where HOVR green is under AA for text.
+      ColorScheme.fromSeed(seedColor: brand.primaryColor).copyWith(
+        primary: brand.primaryColor,
+        onPrimary: Colors.white,
+        surface: palette.white000,
+      ),
       palette,
       brand,
     );
   }
 
+  /// Dark theme: out of season the same HOVR primary as light, with white on
+  /// it; in a festive [season] that season's lighter dark tone, with dark text on it.
   static ThemeData dark({SeasonalTheme season = SeasonalTheme.none}) {
-    final brand = BrandColors.forSeason(season).dark;
+    final brand = BrandColors.forSeason(season, dark: true);
     const palette = AppPalette.dark;
     return _build(
       ColorScheme.fromSeed(
@@ -48,7 +47,8 @@ class AppTheme {
         brightness: Brightness.dark,
       ).copyWith(
         primary: brand.primaryColor,
-        onPrimary: palette.white000,
+        // White only reads on the dark HOVR green; festive dark tones are light.
+        onPrimary: season == SeasonalTheme.none ? Colors.white : palette.white000,
         surface: palette.white000,
         onSurface: palette.black900,
         onSurfaceVariant: palette.textSecondary,
