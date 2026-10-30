@@ -1,3 +1,15 @@
+## 0.1.2
+
+* Screen backgrounds follow the festive season: `AppPalette.forSeason(season,
+  dark:)` tints the page colours (`white000`, `bgColor`), and
+  `AppTheme.light/dark(season:)` use it, so scaffolds, app bars, Material
+  surfaces and `context.colors.white000` take the festival's tint. Text, greys,
+  `white` (also text on buttons) and status colours do not change, and all text
+  that reads on the normal page still meets WCAG AA. Out of season nothing
+  changes. Colour codes in `doc/festive_colors.md`.
+* **Action for apps:** screens that paint fixed colours instead of
+  `context.colors.*` keep a neutral background; switch them to the palette.
+
 ## 0.1.1
 
 * Brand colours follow the festive season (unchanged from 0.1.0): pass

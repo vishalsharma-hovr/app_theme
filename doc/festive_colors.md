@@ -31,6 +31,21 @@ MaterialApp(
 - **Readable in every season:** text and icon tokens are at least 4.5:1 (WCAG AA)
   on the page, light and dark, with the exception below. Tests enforce this.
 
+## Page backgrounds
+
+`AppPalette.forSeason(season, dark:)` (used by `AppTheme.light/dark(season:)`)
+tints only the page colours; text, greys, `white` and status colours stay.
+
+| Season | Light page `white000` | Light alt `bgColor` | Dark page `white000` | Dark alt `bgColor` |
+|---|---|---|---|---|
+| None | `#FDFFFC` | `#F7F7FA` | `#161615` | `#0D0D0C` |
+| Halloween | `#FFF9F2` | `#FFF1E0` | `#1F140F` | `#150D09` |
+| Christmas | `#F0FDF4` | `#DCFCE7` | `#0F1A14` | `#09110D` |
+| New Year | `#FFFBEB` | `#FEF3C7` | `#12111F` | `#0B0A15` |
+
+Halloween's light tints are a touch paler than its brand tints so the error red
+`#E80101` and success green `#2E7D32` stay at least 4.5:1.
+
 ## Primary colour
 
 | Season | Light primary | Text on it | Primary on page | Dark primary | Text on it | Primary on page |

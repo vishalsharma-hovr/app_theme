@@ -17,21 +17,23 @@ part of app_theme;
 /// Colour codes per season: `doc/festive_colors.md`.
 class AppTheme {
   /// Light theme: primary is exactly [season]'s brand primary (HOVR green
-  /// `#39851C` out of season) with white on it, on the palette's white surface.
+  /// `#39851C` out of season) with white on it, on the palette's page colour,
+  /// tinted for a festive [season] ([AppPalette.forSeason]).
   /// The driver app passes [AppPalette.driverLight].
   static ThemeData light({
     SeasonalTheme season = SeasonalTheme.none,
     AppPalette palette = AppPalette.light,
   }) {
     final brand = BrandColors.forSeason(season);
+    final pages = palette.forSeason(season, dark: false);
     return _build(
       // The seeded surface is tinted, where HOVR green is under AA for text.
       ColorScheme.fromSeed(seedColor: brand.primaryColor).copyWith(
         primary: brand.primaryColor,
         onPrimary: Colors.white,
-        surface: palette.white000,
+        surface: pages.white000,
       ),
-      palette,
+      pages,
       brand,
     );
   }
@@ -40,7 +42,7 @@ class AppTheme {
   /// it; in a festive [season] that season's lighter dark tone, with dark text on it.
   static ThemeData dark({SeasonalTheme season = SeasonalTheme.none}) {
     final brand = BrandColors.forSeason(season, dark: true);
-    const palette = AppPalette.dark;
+    final palette = AppPalette.dark.forSeason(season, dark: true);
     return _build(
       ColorScheme.fromSeed(
         seedColor: brand.primaryColor,

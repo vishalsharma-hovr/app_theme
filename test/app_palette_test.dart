@@ -153,4 +153,76 @@ void main() {
       }
     });
   });
+
+  group('festive page backgrounds', () {
+    const pages = {
+      SeasonalTheme.halloween: (Color(0xFFFFF9F2), Color(0xFFFFF1E0), Color(0xFF1F140F), Color(0xFF150D09)),
+      SeasonalTheme.christmas: (Color(0xFFF0FDF4), Color(0xFFDCFCE7), Color(0xFF0F1A14), Color(0xFF09110D)),
+      SeasonalTheme.newYear: (Color(0xFFFFFBEB), Color(0xFFFEF3C7), Color(0xFF12111F), Color(0xFF0B0A15)),
+    };
+
+    // Text and icon colours a screen draws on its page background.
+    List<Color> textColours(AppPalette p) => [
+          p.black900, p.black, p.textPrimary, p.textSecondary, p.textMuted, p.textMuted61, p.textMuted2,
+          p.grey500, p.grey600, p.grey700, p.grey800, p.grey900, p.grey444, p.unKnownTextColor, p.iconMuted,
+          p.errorColor, p.textColor, p.logoutIconAndTextColors, p.criticalAlertIconColor, p.lightBlue,
+          p.recommededNextStep, p.warningColorsStringColors, p.successColor, p.warningColor,
+        ];
+
+    test('out of season the pages stay exactly as they are', () {
+      for (final (base, dark) in [(AppPalette.light, false), (AppPalette.driverLight, false), (AppPalette.dark, true)]) {
+        expect(identical(base.forSeason(SeasonalTheme.none, dark: dark), base), isTrue);
+      }
+    });
+
+    for (final MapEntry(key: season, value: (light, lightBg, dark, darkBg)) in pages.entries) {
+      test('${season.name}: pages take the festive tint, everything else stays', () {
+        final l = AppPalette.light.forSeason(season, dark: false);
+        final d = AppPalette.dark.forSeason(season, dark: true);
+        expect((l.white000, l.bgColor, d.white000, d.bgColor), (light, lightBg, dark, darkBg));
+        for (final (festive, base) in [(l, AppPalette.light), (d, AppPalette.dark)]) {
+          expect(festive.white, base.white, reason: 'white is also text on buttons');
+          expect(textColours(festive), textColours(base));
+          expect(festive.grey025, base.grey025);
+        }
+        expect(AppPalette.driverLight.forSeason(season, dark: false).grey012, AppPalette.driverLight.grey012);
+      });
+
+      test('${season.name}: text that reads on the normal page still reads on the festive one', () {
+        for (final (base, dark) in [(AppPalette.light, false), (AppPalette.dark, true)]) {
+          final festive = base.forSeason(season, dark: dark);
+          for (final (page, festivePage) in [(base.white000, festive.white000), (base.bgColor, festive.bgColor)]) {
+            for (final fg in textColours(base)) {
+              if (_contrast(fg, page) < 4.5) continue; // already a non-text colour on this page
+              expect(_contrast(fg, festivePage), greaterThanOrEqualTo(4.5), reason: '$season dark=$dark $fg');
+            }
+          }
+        }
+      });
+
+      test('${season.name}: the season\'s brand text reads on its festive page', () {
+        for (final (brand, page) in [
+          (BrandColors.forSeason(season), AppPalette.light.forSeason(season, dark: false).white000),
+          (BrandColors.forSeason(season, dark: true), AppPalette.dark.forSeason(season, dark: true).white000),
+        ]) {
+          for (final fg in [brand.green700, brand.green600, brand.greenButton, brand.primaryColor, brand.brandPrimary]) {
+            expect(_contrast(fg, page), greaterThanOrEqualTo(4.5), reason: '$season $fg on $page');
+          }
+        }
+      });
+
+      test('${season.name}: the app theme paints festive pages, light and dark', () {
+        for (final (theme, page) in [
+          (AppTheme.light(season: season), light),
+          (AppTheme.dark(season: season), dark),
+        ]) {
+          expect(theme.scaffoldBackgroundColor, page);
+          expect(theme.colorScheme.surface, page);
+          expect(theme.appBarTheme.backgroundColor, page);
+          expect(theme.extension<AppPalette>()!.white000, page);
+        }
+      });
+    }
+  });
 }
+

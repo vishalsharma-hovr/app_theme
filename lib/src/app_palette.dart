@@ -181,6 +181,82 @@ class AppPalette extends ThemeExtension<AppPalette> {
     warningColor: Color(0xFFFBBF24),
   );
 
+  /// This palette with [season]'s page backgrounds: [white000] (screens, app
+  /// bars, sheets) and [bgColor] take the festival's tint; text, greys,
+  /// [white] (also text on buttons) and status colours stay. [dark] picks the
+  /// dark-mode tint. Out of season returns this palette unchanged. Colour
+  /// codes: `doc/festive_colors.md`.
+  AppPalette forSeason(SeasonalTheme season, {required bool dark}) {
+    final pages = switch (season) {
+      SeasonalTheme.none => null,
+      // Light: pale festival tints (Halloween lightened so error and success text stay AA);
+      // dark: very dark versions. All text that reads on the normal page stays AA.
+      SeasonalTheme.halloween => dark
+          ? (const Color(0xFF1F140F), const Color(0xFF150D09))
+          : (const Color(0xFFFFF9F2), const Color(0xFFFFF1E0)),
+      SeasonalTheme.christmas => dark
+          ? (const Color(0xFF0F1A14), const Color(0xFF09110D))
+          : (const Color(0xFFF0FDF4), const Color(0xFFDCFCE7)),
+      SeasonalTheme.newYear => dark
+          ? (const Color(0xFF12111F), const Color(0xFF0B0A15))
+          : (const Color(0xFFFFFBEB), const Color(0xFFFEF3C7)),
+    };
+    if (pages == null) return this;
+    return _withPages(pages.$1, pages.$2);
+  }
+
+  AppPalette _withPages(Color page, Color pageAlt) => AppPalette(
+        white000: page,
+        white: white,
+        black900: black900,
+        black: black,
+        bgColor: pageAlt,
+        grey012: grey012,
+        grey025: grey025,
+        grey050: grey050,
+        grey100: grey100,
+        grey200: grey200,
+        grey300: grey300,
+        grey400: grey400,
+        grey500: grey500,
+        grey600: grey600,
+        grey700: grey700,
+        grey800: grey800,
+        grey900: grey900,
+        grey444: grey444,
+        blue050: blue050,
+        orange050: orange050,
+        textFormFieldBackgroundColor: textFormFieldBackgroundColor,
+        errorColor: errorColor,
+        greyColor: greyColor,
+        buttonBackgroundColor: buttonBackgroundColor,
+        referAndEarnArrowBgColor: referAndEarnArrowBgColor,
+        textColor: textColor,
+        backArrowButtonBackgroundColor: backArrowButtonBackgroundColor,
+        warningContainerBackgroundErrorColor: warningContainerBackgroundErrorColor,
+        warningColorsStringColors: warningColorsStringColors,
+        logoutIconAndTextColors: logoutIconAndTextColors,
+        complaintSelectedColor: complaintSelectedColor,
+        textPrimary: textPrimary,
+        textSecondary: textSecondary,
+        textMuted: textMuted,
+        textMuted61: textMuted61,
+        textMuted2: textMuted2,
+        bgMuted: bgMuted,
+        iconMuted: iconMuted,
+        unKnownTextColor: unKnownTextColor,
+        blueRatingColors: blueRatingColors,
+        goOfflineButtonColors: goOfflineButtonColors,
+        whiteColorButton: whiteColorButton,
+        lightBlue: lightBlue,
+        recommededNextStep: recommededNextStep,
+        warningAlertsBackgroundColor: warningAlertsBackgroundColor,
+        criticalAlertsBackgroundColor: criticalAlertsBackgroundColor,
+        criticalAlertIconColor: criticalAlertIconColor,
+        successColor: successColor,
+        warningColor: warningColor,
+      );
+
   /// The palette in [context]'s theme, or [light] when none is attached.
   static AppPalette of(BuildContext context) =>
       Theme.of(context).extension<AppPalette>() ?? light;
